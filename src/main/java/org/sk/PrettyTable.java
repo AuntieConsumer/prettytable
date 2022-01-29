@@ -1,13 +1,8 @@
-package org.sk;
-
-import org.apache.commons.lang3.StringUtils;
+// Made by skebir & edited by AuntieConsumer
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by salim on 6/1/17.
- */
 public class PrettyTable {
     private List<String> headers = new ArrayList<>();
     private List<List<String>> data = new ArrayList<>();
@@ -30,10 +25,23 @@ public class PrettyTable {
     }
 
     private String formatRow(List<String> row) {
+        int len;
+        String  space1 = "​​ ";
+        String  space2 = "​​ "; 
         StringBuilder result = new StringBuilder();
         result.append("|");
         for (int i = 0; i < row.size(); i++) {
-            result.append(StringUtils.center(row.get(i), getMaxSize(i) + 2));
+            space1 = " ";
+            space2 = " ";
+            len = (getMaxSize(i))-(row.get(i).length());
+            for (int j = 0; j < len/2; j++) {
+              space1 = space1 + " ";
+              space2 = space2 + " ";
+            }
+            if (!(len % 2 == 0)){
+              space2 = space2+" ";
+            } 
+            result.append(space1+row.get(i)+space2);
             result.append("|");
         }
         result.append("\n");
